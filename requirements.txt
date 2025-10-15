@@ -1,0 +1,7 @@
+redis
+cryptography
+pandas
+numpy
+flask
+statsmodels
+scikit-learn

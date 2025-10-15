@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CipherCache | Intelligent Secure Data Caching</title>
+<script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6b21a8 0%, #1e40af 100%);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Vanta.js Globe Background -->
+    <div id="vanta-globe" class="fixed inset-0 -z-10 opacity-20"></div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i data-feather="shield" class="h-8 w-8 text-purple-600"></i>
+                        <span class="ml-2 text-xl font-bold text-gray-900">CipherCache</span>
+</div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#" class="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Features</a>
+                    <a href="#" class="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Documentation</a>
+                    <a href="#" class="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Pricing</a>
+                    <a href="#" class="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Blog</a>
+                </div>
+                <div class="flex items-center">
+                    <button class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">CipherCache: Secure & Intelligent Caching 🚀</h1>
+                <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8">
+                    The only caching framework that combines military-grade encryption with predictive AI to deliver unprecedented speed and security.
+                </p>
+                <div class="mb-8">
+                    <div class="inline-flex items-center bg-black bg-opacity-20 px-4 py-2 rounded-full">
+                        <span class="h-2 w-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                        <span class="text-sm">Backend Status: Live & Secure</span>
+                    </div>
+                </div>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button class="bg-white text-purple-800 hover:bg-gray-100 px-6 py-3 rounded-md text-lg font-semibold transition-colors">
+                        Try for Free
+                    </button>
+                    <button class="bg-transparent border-2 border-white hover:bg-white hover:bg-opacity-10 px-6 py-3 rounded-md text-lg font-semibold transition-colors">
+                        View Demo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Why CipherCache?</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Experience the future of caching with our hybrid encryption and AI-powered prediction engine.
+            </p>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-16">
+            <h3 class="text-2xl font-bold text-center mb-6">Live Performance Demo</h3>
+            <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div class="text-center">
+                    <div class="bg-purple-100 rounded-lg p-4 mb-2">
+                        <span class="text-3xl font-bold text-purple-600" id="cache-hit-rate">98.7%</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Cache Hit Rate</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-blue-100 rounded-lg p-4 mb-2">
+                        <span class="text-3xl font-bold text-blue-600" id="response-time">2.3ms</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Avg Response Time</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-green-100 rounded-lg p-4 mb-2">
+                        <span class="text-3xl font-bold text-green-600" id="prediction-accuracy">94.2%</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Prediction Accuracy</p>
+                </div>
+            </div>
+            <div class="text-center">
+                <button onclick="runDemo()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-md font-semibold transition-colors">
+                    Run Live Demo
+                </button>
+            </div>
+        </div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                <div class="bg-purple-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                    <i data-feather="zap" class="w-6 h-6 text-purple-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Lightning Fast</h3>
+                <p class="text-gray-600">
+                    Redis-powered in-memory caching delivers responses in milliseconds, reducing latency by up to 90%.
+                </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                <div class="bg-blue-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                    <i data-feather="lock" class="w-6 h-6 text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Secure by Design</h3>
+                <p class="text-gray-600">
+                    Hybrid encryption (AES + RSA) ensures your cached data remains protected from unauthorized access.
+                </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                <div class="bg-green-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                    <i data-feather="activity" class="w-6 h-6 text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Predictive Intelligence</h3>
+                <p class="text-gray-600">
+                    ML-powered preloading anticipates your needs before you make the request.
+                </p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                <div class="bg-yellow-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                    <i data-feather="cpu" class="w-6 h-6 text-yellow-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Distributed Architecture</h3>
+                <p class="text-gray-600">
+                    Fault-tolerant design ensures high availability even during infrastructure failures.
+                </p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                <div class="bg-red-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                    <i data-feather="eye" class="w-6 h-6 text-red-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Real-time Monitoring</h3>
+                <p class="text-gray-600">
+                    Comprehensive dashboard tracks cache performance, security metrics, and prediction accuracy.
+                </p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                <div class="bg-indigo-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                    <i data-feather="codepen" class="w-6 h-6 text-indigo-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Easy Integration</h3>
+                <p class="text-gray-600">
+                    Simple API and client libraries for all major programming languages.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- Backend Architecture Section -->
+    <div class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Advanced Backend Architecture</h2>
+                <p class="text-gray-300 max-w-3xl mx-auto">
+                    Built with Python, Redis, and cutting-edge ML libraries for optimal performance and security.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div class="text-center">
+                    <div class="bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="database" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Redis Cache</h3>
+                    <p class="text-gray-300">In-memory data store for lightning-fast access</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="lock" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Hybrid Encryption</h3>
+                    <p class="text-gray-300">AES + RSA military-grade security</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="cpu" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">ML Prediction</h3>
+                    <p class="text-gray-300">LSTM neural networks for intelligent caching</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="activity" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Real-time Dashboard</h3>
+                    <p class="text-gray-300">Flask-based monitoring with live metrics</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-6">Ready to secure your caching infrastructure?</h2>
+                <p class="text-xl mb-8 max-w-3xl mx-auto">
+                    Join enterprises that trust CipherCache for their most sensitive data operations.
+                </p>
+                <button class="bg-white text-purple-800 hover:bg-gray-100 px-8 py-4 rounded-md text-lg font-semibold transition-colors">
+                    Deploy CipherCache
+                </button>
+            </div>
+        </div>
+    </div>
+<!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Product</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Features</a></li>
+                        <li><a href="#" class="hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white">Documentation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">About</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Privacy</a></li>
+                        <li><a href="#" class="hover:text-white">Terms</a></li>
+                        <li><a href="#" class="hover:text-white">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-white"><i data-feather="twitter"></i></a>
+                        <a href="#" class="hover:text-white"><i data-feather="github"></i></a>
+                        <a href="#" class="hover:text-white"><i data-feather="linkedin"></i></a>
+                    </div>
+                </div>
+            </div
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+                <p>© 2023 CipherCache. All rights reserved.</p>
+            </div>
+</div>
+    </footer>
+
+    <script>
+        // Initialize Vanta.js globe
+        VANTA.GLOBE({
+            el: "#vanta-globe",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x6b21a8,
+            backgroundColor: 0xf8fafc
+        });
+
+        // Interactive Demo Function
+        function runDemo() {
+            const metrics = [
+                { element: 'cache-hit-rate', values: ['98.7%', '99.1%', '99.4%', '99.2%'] },
+                { element: 'response-time', values: ['2.3ms', '1.8ms', '1.5ms', '1.2ms'] },
+                { element: 'prediction-accuracy', values: ['94.2%', '95.8%', '96.3%', '97.1%'] }
+            ];
+
+            metrics.forEach(metric => {
+                let currentIndex = 0;
+                const element = document.getElementById(metric.element);
+                const interval = setInterval(() => {
+                    element.textContent = metric.values[currentIndex];
+                    element.classList.add('scale-110');
+                    setTimeout(() => element.classList.remove('scale-110'), 200);
+                    currentIndex = (currentIndex + 1) % metric.values.length;
+                }, 1000);
+                
+                // Stop after 4 cycles
+                setTimeout(() => clearInterval(interval), 4000);
+            });
+        }
+
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Add scroll animation for features
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-8');
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .animate-fade-in-up {
+                animation: fadeInUp 0.6s ease-out forwards;
+            }
+            .scale-110 {
+                transform: scale(1.1);
+                transition: transform 0.2s ease;
+            }
+        `;
+        document.head.appendChild(style);
+</script>
+</body>
+</html>
