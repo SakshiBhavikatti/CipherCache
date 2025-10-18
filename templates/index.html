@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Secure Caching Demo</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 50px auto;
+      max-width: 700px;
+      text-align: center;
+      background-color: #f2f6fa;
+    }
+    h1 {
+      color: #333;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .box {
+      margin-top: 25px;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    .status {
+      color: #007BFF;
+      font-weight: bold;
+    }
+    .dashboard {
+      display: flex;
+      justify-content: space-around;
+      background: #ffffff;
+      border-radius: 8px;
+      margin-top: 30px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .metric {
+      text-align: center;
+    }
+    .metric h2 {
+      color: #007BFF;
+      margin: 5px 0;
+    }
+    .metric p {
+      margin: 0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔐 Intelligent Secure Data Caching</h1>
+  <form method="POST">
+    <input type="text" name="query" placeholder="Enter your query..." required>
+    <br><br>
+    <button type="submit">Search</button>
+  </form>
+
+  {% if result %}
+  <div class="box">
+    <p class="status">{{ status }}</p>
+    <p><b>Result:</b> {{ result }}</p>
+    <p><b>Response Time:</b> {{ latency }} ms</p>
+  </div>
+  {% endif %}
+
+  <div class="dashboard">
+    <div class="metric">
+      <h2>{{ stats.hits }}</h2>
+      <p>Cache Hits</p>
+    </div>
+    <div class="metric">
+      <h2>{{ stats.misses }}</h2>
+      <p>Cache Misses</p>
+    </div>
+    <div class="metric">
+      <h2>{{ stats.total }}</h2>
+      <p>Total Queries</p>
+    </div>
+    <div class="metric">
+      <h2>{{ stats.avg_latency }} ms</h2>
+      <p>Avg Latency</p>
+    </div>
+  </div>
+</body>
+</html>

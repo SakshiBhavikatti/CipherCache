@@ -33,3 +33,11 @@ docker stop redis-cache
 To start it again:
 
 docker start redis-cache
+
+python test_redis.py
+
+python test_cache_manager.py
+
+python test_encryptor.py
+
+python app.py
