@@ -66,8 +66,27 @@
     }
   </style>
 </head>
+
 <body>
+
   <h1>🔐 Intelligent Secure Data Caching</h1>
+
+  <!-- Dataset Selector -->
+  <form action="/set_dataset" method="POST">
+    <label><b>Select Dataset:</b></label>
+    <select name="dataset">
+      <option value="healthcare">Healthcare</option>
+      <option value="banking">Banking</option>
+      <option value="ecommerce">E-commerce</option>
+    </select>
+    <button type="submit">Switch</button>
+  </form>
+
+  <p><b>Current Dataset:</b> {{ current_dataset }}</p>
+
+  <hr><br>
+
+  <!-- Search Box -->
   <form method="POST">
     <input type="text" name="query" placeholder="Enter your query..." required>
     <br><br>
@@ -79,6 +98,10 @@
     <p class="status">{{ status }}</p>
     <p><b>Result:</b> {{ result }}</p>
     <p><b>Response Time:</b> {{ latency }} ms</p>
+
+    {% if predicted_items %}
+      <p><b>Predicted Preloaded Items:</b> {{ predicted_items }}</p>
+    {% endif %}
   </div>
   {% endif %}
 
@@ -100,5 +123,6 @@
       <p>Avg Latency</p>
     </div>
   </div>
+
 </body>
 </html>
