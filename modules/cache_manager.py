@@ -15,8 +15,7 @@ class CacheManager:
     def set_cache(self, key, value, expiry=None):
         """Store data in cache (optionally set expiry in seconds)"""
         if self.client:
-            data = json.dumps(value)
-            self.client.set(key, data)
+            self.client.set(key, value)
             if expiry:
                 self.client.expire(key, expiry)
             print(f"✅ Cached key '{key}' successfully.")
@@ -29,7 +28,7 @@ class CacheManager:
             value = self.client.get(key)
             if value:
                 print(f"📦 Cache hit for key '{key}'.")
-                return json.loads(value)
+                return value
             else:
                 print(f"🚫 Cache miss for key '{key}'.")
                 return None

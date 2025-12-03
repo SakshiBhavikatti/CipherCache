@@ -14,9 +14,8 @@ current_dataset = "healthcare"
 
 
 def load_predictor(domain):
-    """Load the appropriate predictor based on selected dataset."""
+    """Load predictor model for selected dataset."""
     global predictor
-
     try:
         if domain == "healthcare":
             predictor = Predictor("data/healthcare_requests.csv")
@@ -26,12 +25,15 @@ def load_predictor(domain):
             predictor = Predictor("data/ecommerce_requests.csv")
         else:
             predictor = Predictor("data/healthcare_requests.csv")  # fallback
+
+        print(f"📌 Loaded predictor for dataset: {domain}")
+
     except Exception as e:
         print(f"⚠ Error loading predictor for {domain}: {e}")
         predictor = None
 
 
-# Load default dataset
+# Load default predictor
 load_predictor("healthcare")
 
 # Global counters
@@ -40,7 +42,7 @@ stats = {"hits": 0, "misses": 0, "total": 0, "avg_latency": 0}
 
 @app.route("/set_dataset", methods=["POST"])
 def set_dataset():
-    """Switch datasets safely without breaking AES keys."""
+    """Switch all systems to a new dataset."""
     global current_dataset
 
     selected = request.form.get("dataset")
@@ -59,15 +61,19 @@ def set_dataset():
     current_dataset = selected
     load_predictor(selected)
 
-    # ⭐ SAFE cache clearing — DO NOT flush complete Redis
+    # ⭐ Correct Cache Clearing (matches your REAL prefixes)
+    VALID_PREFIXES = ("hea_", "ban_", "eco_")
+
     try:
+        deleted_count = 0
         for key in secure_cache.client.scan_iter("*"):
             k = key.decode()
 
-            if k.startswith(("HLC_", "hea_", "ACC_", "ban_", "ECM_", "eco_")):
+            if k.startswith(VALID_PREFIXES):
                 secure_cache.client.delete(key)
+                deleted_count += 1
 
-        print(f"🧹 Cleared dataset-specific cache for {selected}")
+        print(f"🧹 Cleared {deleted_count} cache entries for dataset switch → {selected}")
 
     except Exception as e:
         print(f"⚠ Failed to clear dataset cache: {e}")
@@ -92,8 +98,8 @@ def index():
 
     if request.method == "POST":
         query = request.form.get("query").strip()
-
         start_time = time.time()
+
         cached_data = secure_cache.get_secure_cache(query)
 
         # ---------------------------------------------------
@@ -102,7 +108,7 @@ def index():
         if cached_data:
             status = "✅ Cache Hit (Decrypted Data)"
 
-            # FIX: prevent KeyError by supporting predicted preload entries
+            # Avoid KeyError: support predicted preload entries
             result = cached_data.get(
                 "result",
                 f"(Cached entity: {cached_data.get('entity_id')})"
@@ -110,6 +116,7 @@ def index():
 
             stats["hits"] += 1
 
+            # Predictions (recent mode)
             if predictor:
                 try:
                     predicted_items = predictor.preload_predictions(
@@ -127,11 +134,14 @@ def index():
         # ---------------------------------------------------
         else:
             status = "❌ Cache Miss — Fetching from Database..."
+
             data = {"query": query, "result": f"Fetched data for {query}"}
             secure_cache.set_secure_cache(query, data)
+
             result = data["result"]
             stats["misses"] += 1
 
+            # Predictions (global mode)
             if predictor:
                 try:
                     predicted_items = predictor.preload_predictions(
@@ -143,6 +153,9 @@ def index():
                 except Exception as e:
                     print("Prediction error:", e)
 
+        # ---------------------------------------------------
+        # LATENCY & METRICS UPDATE
+        # ---------------------------------------------------
         latency = round((time.time() - start_time) * 1000, 2)
         stats["total"] += 1
         stats["avg_latency"] = round(
