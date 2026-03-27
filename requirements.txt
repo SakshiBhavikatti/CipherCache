@@ -5,3 +5,4 @@ numpy
 flask
 statsmodels
 scikit-learn
+prometheus_client
