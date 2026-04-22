@@ -9,9 +9,22 @@
       margin: 50px auto;
       max-width: 700px;
       text-align: center;
-      background-color: #f2f6fa;
+
+      /* Animated Gradient Background */
+      background: linear-gradient(-45deg, #6e90ce, #4c7fd7, #a876dd, #7eabf8);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
     }
+
+    /* Animation Keyframes */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     h1 { color: #333; }
+
     input[type="text"] {
       width: 80%; padding: 10px; margin-top: 20px;
       border: 1px solid #ccc; border-radius: 5px;
@@ -37,7 +50,7 @@
 
 <body>
 
-  <h1>🔐 Intelligent Secure Data Caching</h1>
+  <h1> Intelligent Secure Data Caching</h1>
 
   <!-- Dataset Selector (PURE FORM 1) -->
   <form action="/set_dataset" method="POST" id="datasetForm">
